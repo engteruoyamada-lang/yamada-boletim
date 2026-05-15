@@ -1,0 +1,56 @@
+# .github/workflows/boletim_diario.yml
+name: Boletim Meteorológico Yamada
+
+on:
+  schedule:
+    # 08h30 UTC = 05h30 BRT (UTC-3)
+    - cron: "30 8 * * *"
+  workflow_dispatch:  # permite disparo manual pelo painel do GitHub
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Instalar dependências do sistema (para geopandas)
+        # geopandas depende de bibliotecas C (GDAL, GEOS) que precisam
+        # ser instaladas no sistema operacional antes do pip install
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libgdal-dev libgeos-dev libproj-dev
+
+      - name: Instalar dependências Python
+        run: pip install -r requirements.txt
+
+      - name: Reconstituir credenciais Gmail
+        # O token.json é criado a partir do Secret em vez de existir em disco.
+        # O GitHub Actions injeta o valor do Secret como variável de ambiente;
+        # aqui gravamos em disco para que a lógica do delivery.py possa encontrá-lo.
+        # Alternativa: o delivery.py já lê de os.environ["GMAIL_TOKEN_JSON"] diretamente.
+        env:
+          GMAIL_TOKEN_JSON: ${{ secrets.GMAIL_TOKEN_JSON }}
+        run: echo "$GMAIL_TOKEN_JSON" > token.json
+
+      - name: Executar pipeline
+        env:
+          EMAIL_FROM:        ${{ secrets.EMAIL_FROM }}
+          GMAIL_TOKEN_JSON:  ${{ secrets.GMAIL_TOKEN_JSON }}
+        run: python main.py
+
+      - name: Salvar PDFs como artefatos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: boletins-${{ github.run_id }}
+          path: output/*.pdf
+          retention-days: 7
