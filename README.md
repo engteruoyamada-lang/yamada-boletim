@@ -1,1 +1,2 @@
 # yamada-boletim
+# boletim-diario
