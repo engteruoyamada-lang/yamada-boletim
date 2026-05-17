@@ -1,0 +1,28 @@
+# Coleta de dados
+requests>=2.31
+pandas>=2.0
+numpy>=1.24
+boto3>=1.28
+s3fs>=2023.9
+xarray>=2023.6
+scipy>=1.11
+
+# Geoespacial
+geopandas>=0.14
+shapely>=2.0
+pyproj>=3.6
+rasterio>=1.3
+
+# Geração de relatório
+matplotlib>=3.7
+reportlab>=4.0
+pillow>=10.0
+
+# Gmail API
+google-auth>=2.22
+google-auth-oauthlib>=1.1
+google-auth-httplib2>=0.1
+google-api-python-client>=2.100
+
+# Utilitários
+python-dotenv>=1.0
