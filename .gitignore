@@ -1,0 +1,52 @@
+# Ambiente Python
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# Secrets e credenciais
+secrets/
+gmail_credentials.json
+credentials.json
+token.json
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Streamlit
+.streamlit/
+
+# Cache
+.cache/
+*.cache
+
+# Dados temporários
+tmp/
+temp/
+*.tmp
+
+# Boletins gerados (opcional, mantém histórico)
+# boletins/
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
