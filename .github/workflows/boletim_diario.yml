@@ -41,7 +41,7 @@ jobs:
         if: success()
         run: |
           git config --global user.name "Yamada Bot"
-          git config --global user.email "bot@yamada.com.br"
+          git config --global user.email "eng.teruoyamada@ymail.com"
           git add boletins/
           git commit -m "Boletim diário: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || true
           git push

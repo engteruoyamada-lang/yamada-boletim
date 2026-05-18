@@ -211,7 +211,7 @@ Estrutura JSON com:
 
 **Variáveis de ambiente necessárias**:
 ```
-GMAIL_SENDER_EMAIL=seu_email@gmail.com
+GMAIL_SENDER_EMAIL=eng.teruoyamada@gmail.com
 GMAIL_CREDENTIALS_PATH=secrets/gmail_credentials.json
 ```
 

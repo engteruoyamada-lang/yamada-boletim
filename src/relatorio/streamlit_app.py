@@ -51,7 +51,7 @@ def main():
     )
 
     st.title("🌾 Yamada Engenharia")
-    st.subtitle("Boletim Meteorológico para Agronegócio")
+    st.markdown("### Boletim Meteorológico para Agronegócio")
 
     # Login
     if "authenticated" not in st.session_state:
